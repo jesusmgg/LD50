@@ -26,6 +26,7 @@ namespace Game.GameSystems.Scenes
 
         IEnumerator Start()
         {
+            // If there is no preloaded scene (for development), load the starting scene
             if (UnityEngine.SceneManagement.SceneManager.sceneCount <= 1 && !string.IsNullOrWhiteSpace(startingScene))
             {
                 TransitionToScene(startingScene);
@@ -34,14 +35,14 @@ namespace Game.GameSystems.Scenes
             yield return null;
         }
 
-        void TransitionToScene(string sceneName, bool setActive = true)
+        public void TransitionToScene(string sceneName, bool setActive = true)
         {
             StartCoroutine(DoLoadScene(sceneName, setActive));
         }
 
         IEnumerator DoLoadScene(string sceneName, bool setActive)
         {
-            // TODO: show UI
+            // TODO: show loader UI (spinner or something)
 
             if (IsLoadingScene)
             {
