@@ -10,6 +10,8 @@ namespace Game.Ingame.Tank
         Camera _mainCamera;
         TankController _tankController;
 
+        public TankController TankController => _tankController;
+
         [Inject]
         void Construct(TankController tankController)
         {
@@ -27,17 +29,28 @@ namespace Game.Ingame.Tank
             if (Input.GetMouseButtonDown(0) && !isOverUI)
             {
                 var point = GetMousePositionOnGround();
-                _tankController.InputTurretTargetPosition(point);
+                if (point.HasValue)
+                {
+                    _tankController.InputTurretTargetPosition(point.Value);
+                }
             }
 
             if (Input.GetMouseButtonDown(1) && !isOverUI)
             {
                 var point = GetMousePositionOnGround();
-                _tankController.InputTargetPosition(point);
+                if (point.HasValue)
+                {
+                    _tankController.InputTargetPosition(point.Value);
+                }
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                InputShoot();
             }
         }
 
-        Vector3 GetMousePositionOnGround()
+        Vector3? GetMousePositionOnGround()
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _mouseRaycastMask))
@@ -46,7 +59,7 @@ namespace Game.Ingame.Tank
             }
             else
             {
-                return Vector3.zero;
+                return null;
             }
         }
 

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankSpeed: 10
   TankTurnSpeed: 90
-  TankHitpoints: 1
+  TankHitpoints: 2
   TankDamage: 1
   TankBulletSpeed: 60
-  TankBulletRange: 15
+  TankBulletRange: 35
   TankTurretTurnSpeed: 90
   TankTurretLength: 1.5
-  TankRadius: 2
+  TankRadius: 1.2

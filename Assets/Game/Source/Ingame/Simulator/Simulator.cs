@@ -154,8 +154,10 @@ namespace Game.Ingame.Simulator
                         
                         HitPoints = previousState.HitPoints
                     };
-
+                    
                     actor.History[_simulationTick] = newState;
+
+                    var isAlive = IsAlive(actor, _simulationTick);
 
                     // Body rotation
                     var bodyPositionInputs = _bodyPositionInputQueue.Where(x => x.Key == actor).ToList();
@@ -168,11 +170,15 @@ namespace Game.Ingame.Simulator
                         newState.TargetBodyRotation = Angle.Normalize(angle);
                         _bodyPositionInputQueue.Remove(input);
                     }
-                    newState.BodyRotation = Mathf.MoveTowardsAngle(previousState.BodyRotation,
-                        newState.TargetBodyRotation, actor.TurnSpeed * TimeStep);
+
+                    if (isAlive)
+                    {
+                        newState.BodyRotation = Mathf.MoveTowardsAngle(previousState.BodyRotation,
+                            newState.TargetBodyRotation, actor.TurnSpeed * TimeStep);
+                    }
 
                     // Body position
-                    if (IsAtRotation(actor, newState.TargetBodyRotation, _simulationTick))
+                    if (isAlive && IsAtRotation(actor, newState.TargetBodyRotation, _simulationTick))
                     {
                         newState.BodyPosition = Vector2.MoveTowards(newState.BodyPosition,
                             newState.TargetBodyPosition, actor.Speed * TimeStep);
@@ -185,14 +191,17 @@ namespace Game.Ingame.Simulator
                         newState.TargetTurretRotation = input.Value;
                         _turretRotationInputQueue.Remove(input);
                     }
-                    newState.TurretRotation = Mathf.MoveTowardsAngle(previousState.TurretRotation,
-                        newState.TargetTurretRotation, actor.TurretTurnSpeed * TimeStep);
+                    if (isAlive)
+                    {
+                        newState.TurretRotation = Mathf.MoveTowardsAngle(previousState.TurretRotation,
+                            newState.TargetTurretRotation, actor.TurretTurnSpeed * TimeStep);
+                    }
                     
                     // Shoot
                     var shootInputs = _shootInputQueue.Where(x => x == actor).ToList();
                     foreach (var input in shootInputs)
                     {
-                        if (!newState.HasBullet)
+                        if (isAlive && !newState.HasBullet)
                         {
                             newState.HasBullet = true;
                             newState.BulletDirection = Actor.UnityToSimulatorPosition(
@@ -213,6 +222,24 @@ namespace Game.Ingame.Simulator
                         {
                             newState.HasBullet = false;
                             OnBulletHit.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));
+                        }
+                    }
+                }
+
+                // Check for hits
+                foreach (var actor in _actors.Where(x => x.History[_simulationTick].HasBullet))
+                {
+                    foreach (var target in _actors.Where(x => IsAlive(x, _simulationTick)))
+                    {
+                        var actorState = actor.History[_simulationTick];
+                        var targetState = target.History[_simulationTick];
+                        if (IsAtPosition(target, actorState.BulletPosition, _simulationTick))
+                        {
+                            actorState.HasBullet = false;
+                            targetState.HitPoints = Mathf.Clamp(targetState.HitPoints - actor.Damage, 
+                                0, target.MaxHitPoints);
+                            OnBulletHit.Invoke(Actor.SimulatorToUnityPosition(actorState.BulletPosition));
+                            break;
                         }
                     }
                 }
@@ -266,6 +293,17 @@ namespace Game.Ingame.Simulator
             rotation %= 360;
             var bodyRotation = actor.History[tick].BodyRotation % 360f;
             return Mathf.Abs(bodyRotation - rotation) < 1f;
+        }
+
+        public bool IsAlive(Actor actor, int tick)
+        {
+            if (tick < 0 || tick > _maxSimulationTick)
+            {
+                Debug.LogError("Alive check: requested tick out of range.");
+                return false;
+            }
+            
+            return actor.History[tick].HitPoints > 0;
         }
 
         public void EnqueueBodyPositionInput(Actor actor, Vector2 targetPosition)

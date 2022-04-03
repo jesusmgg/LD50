@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 
 namespace Game.Ingame.Tank
@@ -7,6 +8,7 @@ namespace Game.Ingame.Tank
         public override void InstallBindings()
         {
             Container.Bind<TankController>().FromComponentOn(gameObject).AsSingle();
+            Container.Bind<MeshRenderer>().FromComponentsInChildren().AsSingle();
         }
     }
 }
