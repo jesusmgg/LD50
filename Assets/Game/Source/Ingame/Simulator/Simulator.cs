@@ -6,6 +6,7 @@ using Game.Ingame.Tank;
 using Game.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Ingame.Simulator
 {
@@ -36,6 +37,10 @@ namespace Game.Ingame.Simulator
         public int SimulationTick => _simulationTick;
         public int MaxSimulationTick => _maxSimulationTick;
         public float TimeStep => 1f / _tickRate;
+        
+        public UnityEvent<Vector3> OnBulletShoot = new();
+        public UnityEvent<Vector3> OnBulletTravel = new();
+        public UnityEvent<Vector3> OnBulletHit = new();
 
         void Start()
         {
@@ -50,10 +55,12 @@ namespace Game.Ingame.Simulator
                 tankController.Actor.Speed = _settings.TankSpeed;
                 tankController.Actor.TurnSpeed = _settings.TankTurnSpeed;
                 tankController.Actor.TurretTurnSpeed = _settings.TankTurretTurnSpeed;
+                tankController.Actor.TurretLength = _settings.TankTurretLength;
                 tankController.Actor.Damage = _settings.TankDamage;
                 tankController.Actor.MaxHitPoints = _settings.TankHitpoints;
                 tankController.Actor.Radius = _settings.TankRadius;
                 tankController.Actor.BulletSpeed = _settings.TankBulletSpeed;
+                tankController.Actor.BulletRange = _settings.TankBulletRange;
 
                 var initialState = new Actor.State
                 {
@@ -139,7 +146,13 @@ namespace Game.Ingame.Simulator
                         TargetBodyPosition = previousState.TargetBodyPosition,
                         
                         TurretRotation = previousState.TurretRotation,
-                        TargetTurretRotation = previousState.TargetTurretRotation
+                        TargetTurretRotation = previousState.TargetTurretRotation,
+                        
+                        HasBullet = previousState.HasBullet,
+                        BulletDirection = previousState.BulletDirection,
+                        BulletPosition = previousState.BulletPosition,
+                        
+                        HitPoints = previousState.HitPoints
                     };
 
                     actor.History[_simulationTick] = newState;
@@ -174,6 +187,34 @@ namespace Game.Ingame.Simulator
                     }
                     newState.TurretRotation = Mathf.MoveTowardsAngle(previousState.TurretRotation,
                         newState.TargetTurretRotation, actor.TurretTurnSpeed * TimeStep);
+                    
+                    // Shoot
+                    var shootInputs = _shootInputQueue.Where(x => x == actor).ToList();
+                    foreach (var input in shootInputs)
+                    {
+                        if (!newState.HasBullet)
+                        {
+                            newState.HasBullet = true;
+                            newState.BulletDirection = Actor.UnityToSimulatorPosition(
+                                Quaternion.AngleAxis(newState.TurretRotation, Vector3.up) * Vector3.forward);
+                            newState.BulletPosition = newState.BodyPosition +
+                                                      newState.BulletDirection.normalized * actor.TurretLength;
+                        OnBulletShoot.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));
+                        }
+                        _shootInputQueue.Remove(input);
+                    }
+
+                    if (newState.HasBullet)
+                    {
+                        newState.BulletPosition += newState.BulletDirection * actor.BulletSpeed * TimeStep;
+                        OnBulletTravel.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));
+                        
+                        if (Vector2.Distance(newState.BulletPosition, newState.BodyPosition) > actor.BulletRange)
+                        {
+                            newState.HasBullet = false;
+                            OnBulletHit.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));
+                        }
+                    }
                 }
 
                 await UniTask.WaitUntil(() => SimulationSpeed > 0.01f);

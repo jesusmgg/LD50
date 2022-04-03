@@ -60,5 +60,10 @@ namespace Game.Ingame.Tank
             var angle = Vector3.SignedAngle(Vector3.forward, direction, Vector3.up);
             _simulator.EnqueueTurretRotationInput(Actor, Angle.Normalize(angle));
         }
+
+        public void InputShoot()
+        {
+            _simulator.EnqueueShootInput(Actor);
+        }
     }
 }

@@ -49,5 +49,10 @@ namespace Game.Ingame.Tank
                 return Vector3.zero;
             }
         }
+
+        public void InputShoot()
+        {
+            _tankController.InputShoot();
+        }
     }
 }

@@ -16,6 +16,8 @@ MonoBehaviour:
   TankTurnSpeed: 90
   TankHitpoints: 1
   TankDamage: 1
-  TankBulletSpeed: 25
+  TankBulletSpeed: 60
+  TankBulletRange: 15
   TankTurretTurnSpeed: 90
+  TankTurretLength: 1.5
   TankRadius: 2

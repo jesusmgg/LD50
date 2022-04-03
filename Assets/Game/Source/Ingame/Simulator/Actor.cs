@@ -13,9 +13,11 @@ namespace Game.Ingame.Simulator
         public float Speed { get; set; }
         public float TurnSpeed { get; set; }
         public float TurretTurnSpeed { get; set; }
+        public float TurretLength { get; set; }
         public int MaxHitPoints { get; set; }
         public int Damage { get; set; }
         public float BulletSpeed { get; set; }
+        public float BulletRange { get; set; }
         public float Radius { get; set; }
         
         public GameObject GameObject { get; set; }
@@ -51,6 +53,7 @@ namespace Game.Ingame.Simulator
             public float TargetTurretRotation { get; set; }
             
             public bool HasBullet { get; set; }
+            public Vector2 BulletDirection { get; set; }
             public Vector2 BulletPosition { get; set; }
             
             public int HitPoints { get; set; }
