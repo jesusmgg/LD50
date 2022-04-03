@@ -1,20 +1,18 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Game.Ingame.Tank;
 using Game.Utils;
+using Sirenix.OdinInspector;
 using UnityEngine;
-using NaughtyAttributes;
 
 namespace Game.Ingame.Simulator
 {
     public class Simulator : MonoBehaviour
     {
-        /// <summary>
-        /// Ticks per second (real-time).
-        /// </summary>
-        [SerializeField] [ReadOnly] int _simulationSpeed = 60;
+        [SerializeField, Range(0f, 10f)] float _simulationSpeed = 1f;
+        [SerializeField, Range(0, 120)] int _ticksPerSecond = 60;
         [SerializeField] SimulatorSettings _settings;
         [SerializeField] List<TankController> _tankControllers;
         List<Actor> _actors = new();
@@ -26,19 +24,11 @@ namespace Game.Ingame.Simulator
         bool _isConfigured = false;
         bool _isSimulating = false;
 
-        int _simulationTick = 0;
+        [SerializeField, ReadOnly] int _simulationTick = 0;
         int _maxSimulationTick = 0;
 
-        Coroutine _runningSimulation;
-
-        public int SimulationSpeed
-        {
-            get { return _simulationSpeed; }
-            set { _simulationSpeed = value; }
-        }
-
         public int SimulationTick => _simulationTick;
-        public float TimeStep => 1f / _simulationSpeed;
+        public float TimeStep => 1f / _ticksPerSecond;
 
         void Start()
         {
@@ -101,7 +91,7 @@ namespace Game.Ingame.Simulator
             if (_isConfigured && !_isSimulating)
             {
                 _isSimulating = true;
-                _runningSimulation = StartCoroutine(Simulate());
+                Simulate().Forget();
             }
             else
             {
@@ -112,7 +102,6 @@ namespace Game.Ingame.Simulator
         public void Pause()
         {
             _isSimulating = false;
-            StopCoroutine(_runningSimulation);
         }
         
         public void Stop()
@@ -121,7 +110,7 @@ namespace Game.Ingame.Simulator
             _isConfigured = false;
         }
 
-        IEnumerator Simulate()
+        async UniTask Simulate()
         {
             while (_isSimulating)
             {
@@ -179,11 +168,10 @@ namespace Game.Ingame.Simulator
                     newState.TurretRotation = Mathf.MoveTowardsAngle(previousState.TurretRotation,
                         newState.TargetTurretRotation, actor.TurretTurnSpeed * TimeStep);
                 }
-                
-                yield return new WaitForSecondsRealtime(TimeStep);
-            }
 
-            yield return null;
+                await UniTask.WaitUntil(() => _simulationSpeed > 0f);
+                await UniTask.Delay(TimeSpan.FromSeconds(TimeStep / _simulationSpeed));
+            }
         }
 
         public void AddActor(Actor actor)
