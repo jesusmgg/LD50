@@ -12,7 +12,7 @@ namespace Game.Ingame.Simulator
     public class Simulator : MonoBehaviour
     {
         [SerializeField, Range(0f, 10f)] float _simulationSpeed = 1f;
-        [SerializeField, Range(0, 120)] int _ticksPerSecond = 60;
+        [SerializeField, Range(0, 120)] int _tickRate = 60;
         [SerializeField] SimulatorSettings _settings;
         [SerializeField] List<TankController> _tankControllers;
         List<Actor> _actors = new();
@@ -27,8 +27,15 @@ namespace Game.Ingame.Simulator
         [SerializeField, ReadOnly] int _simulationTick = 0;
         int _maxSimulationTick = 0;
 
+        public float SimulationSpeed
+        {
+            set => _simulationSpeed = value;
+            get { return _simulationSpeed; }
+        }
+
         public int SimulationTick => _simulationTick;
-        public float TimeStep => 1f / _ticksPerSecond;
+        public int MaxSimulationTick => _maxSimulationTick;
+        public float TimeStep => 1f / _tickRate;
 
         void Start()
         {
@@ -169,9 +176,20 @@ namespace Game.Ingame.Simulator
                         newState.TargetTurretRotation, actor.TurretTurnSpeed * TimeStep);
                 }
 
-                await UniTask.WaitUntil(() => _simulationSpeed > 0f);
-                await UniTask.Delay(TimeSpan.FromSeconds(TimeStep / _simulationSpeed));
+                await UniTask.WaitUntil(() => SimulationSpeed > 0.01f);
+                await UniTask.Delay(TimeSpan.FromSeconds(TimeStep / SimulationSpeed));
             }
+        }
+        
+        public void SetCurrentSimulationTick(int tick)
+        {
+            if (tick > _maxSimulationTick)
+            {
+                Debug.LogError("Trying to set current simulation tick to a value that is higher than the maximum.");
+                return;
+            }
+            
+            _simulationTick = tick;
         }
 
         public void AddActor(Actor actor)

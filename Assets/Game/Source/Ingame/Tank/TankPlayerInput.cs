@@ -23,13 +23,14 @@ namespace Game.Ingame.Tank
 
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+            if (Input.GetMouseButtonDown(0) && !isOverUI)
             {
                 var point = GetMousePositionOnGround();
                 _tankController.InputTurretTargetPosition(point);
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !isOverUI)
             {
                 var point = GetMousePositionOnGround();
                 _tankController.InputTargetPosition(point);
