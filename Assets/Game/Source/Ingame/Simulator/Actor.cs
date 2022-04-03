@@ -12,10 +12,13 @@ namespace Game.Ingame.Simulator
         
         public float Speed { get; set; }
         public float TurnSpeed { get; set; }
+        public float TurretTurnSpeed { get; set; }
         public int MaxHitPoints { get; set; }
         public int Damage { get; set; }
         public float BulletSpeed { get; set; }
         public float Radius { get; set; }
+        
+        public GameObject GameObject { get; set; }
         
         /// <summary>
         /// Index is used to keep track of the current simulation tick.
@@ -27,7 +30,17 @@ namespace Game.Ingame.Simulator
             History = new State[TickAllocation];
         }
         
-        public struct State
+        public static Vector2 UnityToSimulatorPosition(Vector3 position)
+        {
+            return new Vector2(position.x, position.z);
+        }
+        
+        public static Vector3 SimulatorToUnityPosition(Vector2 position)
+        {
+            return new Vector3(position.x, 0, position.y);
+        }
+        
+        public class State
         {
             public Vector2 BodyPosition { get; set; }
             public float BodyRotation { get; set; }

@@ -8,6 +8,7 @@ namespace Game.Ingame
         public override void InstallBindings()
         {
             Container.Bind<CinemachineVirtualCameraBase>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<CinemachineBrain>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

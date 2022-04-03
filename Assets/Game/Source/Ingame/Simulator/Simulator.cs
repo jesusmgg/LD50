@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Ingame.Tank;
+using Game.Utils;
 using UnityEngine;
 using NaughtyAttributes;
 
@@ -12,11 +15,11 @@ namespace Game.Ingame.Simulator
         /// Ticks per second (real-time).
         /// </summary>
         [SerializeField] [ReadOnly] int _simulationSpeed = 60;
-
+        [SerializeField] SimulatorSettings _settings;
+        [SerializeField] List<TankController> _tankControllers;
         List<Actor> _actors = new();
 
         List<KeyValuePair<Actor, Vector2>> _bodyPositionInputQueue = new();
-        List<KeyValuePair<Actor, float>> _bodyRotationInputQueue = new();
         List<KeyValuePair<Actor, float>> _turretRotationInputQueue = new();
         List<Actor> _shootInputQueue = new();
 
@@ -34,14 +37,53 @@ namespace Game.Ingame.Simulator
             set { _simulationSpeed = value; }
         }
 
-        public int TimeStep => 1 / _simulationSpeed;
+        public int SimulationTick => _simulationTick;
+        public float TimeStep => 1f / _simulationSpeed;
 
-        public void Configure(List<Actor> actors)
+        void Start()
         {
-            _actors = actors;
+            if (_settings == null)
+            {
+                Debug.LogError("Simulator settings not set.");
+                return;
+            }
+            
+            foreach (var tankController in _tankControllers)
+            {
+                tankController.Actor.Speed = _settings.TankSpeed;
+                tankController.Actor.TurnSpeed = _settings.TankTurnSpeed;
+                tankController.Actor.TurretTurnSpeed = _settings.TankTurretTurnSpeed;
+                tankController.Actor.Damage = _settings.TankDamage;
+                tankController.Actor.MaxHitPoints = _settings.TankHitpoints;
+                tankController.Actor.Radius = _settings.TankRadius;
+                tankController.Actor.BulletSpeed = _settings.TankBulletSpeed;
 
+                var initialState = new Actor.State
+                {
+                    BodyPosition = Actor.UnityToSimulatorPosition(tankController.transform.position),
+                    BodyRotation = tankController.transform.rotation.eulerAngles.y,
+                    TurretRotation = 0f,
+                    
+                    HitPoints = tankController.Actor.MaxHitPoints,
+                    HasBullet = false
+                };
+                
+                initialState.TargetBodyPosition = initialState.BodyPosition;
+                initialState.TargetBodyRotation = initialState.BodyRotation;
+                initialState.TargetTurretRotation = initialState.TurretRotation;
+
+                tankController.Actor.History[0] = initialState;
+                
+                _actors.Add(tankController.Actor);
+            }
+
+            Configure();
+            Run();
+        }
+
+        public void Configure()
+        {
             _bodyPositionInputQueue.Clear();
-            _bodyRotationInputQueue.Clear();
             _turretRotationInputQueue.Clear();
             _shootInputQueue.Clear();
             
@@ -84,53 +126,60 @@ namespace Game.Ingame.Simulator
             while (_isSimulating)
             {
                 _simulationTick++;
+                _maxSimulationTick = _simulationTick;
                 
                 // Actual simulation tick happens here
                 foreach (var actor in _actors)
                 {
-                    var previousState = actor.History[_simulationTick - 1];
-                    var newState = new Actor.State();
+                    var actorTransform = actor.GameObject.transform;
                     
-                    // Body rotation
-                    newState.TargetBodyRotation = previousState.TargetBodyRotation;
-                    newState.BodyRotation = previousState.BodyRotation;
-                    foreach (var input in _bodyRotationInputQueue.Where(x => x.Key == actor))
+                    var previousState = actor.History[_simulationTick - 1];
+                    var newState = new Actor.State
                     {
-                        newState.TargetBodyRotation = input.Value;
-                        _bodyRotationInputQueue.Remove(input);
+                        BodyRotation = previousState.BodyRotation,
+                        TargetBodyRotation = previousState.TargetBodyRotation,
+                        
+                        BodyPosition = previousState.BodyPosition,
+                        TargetBodyPosition = previousState.TargetBodyPosition,
+                        
+                        TurretRotation = previousState.TurretRotation,
+                        TargetTurretRotation = previousState.TargetTurretRotation
+                    };
+
+                    actor.History[_simulationTick] = newState;
+
+                    // Body rotation
+                    var bodyPositionInputs = _bodyPositionInputQueue.Where(x => x.Key == actor).ToList();
+                    foreach (var input in bodyPositionInputs)
+                    {
+                        newState.TargetBodyPosition = input.Value;
+                        var direction = (input.Value - newState.BodyPosition).normalized;
+                        var angle = Vector3.SignedAngle(Vector3.forward, Actor.SimulatorToUnityPosition(direction),
+                            Vector3.up);
+                        newState.TargetBodyRotation = Angle.Normalize(angle);
+                        _bodyPositionInputQueue.Remove(input);
                     }
                     newState.BodyRotation = Mathf.MoveTowardsAngle(previousState.BodyRotation,
                         newState.TargetBodyRotation, actor.TurnSpeed * TimeStep);
-                    
+
                     // Body position
-                    newState.TargetBodyPosition = previousState.TargetBodyPosition;
-                    newState.BodyPosition = previousState.BodyPosition;
-                    foreach (var input in _bodyPositionInputQueue.Where(x => x.Key == actor))
-                    {
-                        newState.TargetBodyPosition = input.Value;
-                        _bodyPositionInputQueue.Remove(input);
-                    }
                     if (IsAtRotation(actor, newState.TargetBodyRotation, _simulationTick))
                     {
                         newState.BodyPosition = Vector2.MoveTowards(newState.BodyPosition,
                             newState.TargetBodyPosition, actor.Speed * TimeStep);
                     }
-                    
+
                     // Turret rotation
-                    newState.TargetTurretRotation = previousState.TargetTurretRotation;
-                    newState.TurretRotation = previousState.TurretRotation;
-                    foreach (var input in _turretRotationInputQueue.Where(x => x.Key == actor))
+                    var turretRotationInputs = _turretRotationInputQueue.Where(x => x.Key == actor).ToList();
+                    foreach (var input in turretRotationInputs)
                     {
                         newState.TargetTurretRotation = input.Value;
                         _turretRotationInputQueue.Remove(input);
                     }
                     newState.TurretRotation = Mathf.MoveTowardsAngle(previousState.TurretRotation,
-                        newState.TargetTurretRotation, actor.TurnSpeed * TimeStep);
-                    
-                    actor.History[_simulationTick] = newState;
+                        newState.TargetTurretRotation, actor.TurretTurnSpeed * TimeStep);
                 }
-
-                _maxSimulationTick = _simulationTick;
+                
                 yield return new WaitForSecondsRealtime(TimeStep);
             }
 
@@ -175,11 +224,6 @@ namespace Game.Ingame.Simulator
         public void EnqueueBodyPositionInput(Actor actor, Vector2 targetPosition)
         {
             _bodyPositionInputQueue.Add(new KeyValuePair<Actor, Vector2>(actor, targetPosition));
-        }
-
-        public void EnqueueBodyRotationInput(Actor actor, float targetRotation)
-        {
-            _bodyRotationInputQueue.Add(new KeyValuePair<Actor, float>(actor, targetRotation));
         }
 
         public void EnqueueTurretRotationInput(Actor actor, float targetRotation)
