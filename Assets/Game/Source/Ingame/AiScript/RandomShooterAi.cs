@@ -9,7 +9,16 @@ namespace Game.Ingame.AiScript
 {
     public class RandomShooterAi : MonoBehaviour
     {
+        [SerializeField] bool _canMove;
+        [SerializeField] bool _canAim;
+        [SerializeField] bool _canShoot;
+        
         [SerializeField] float _roamingRange = 4f;
+        
+        [SerializeField] Vector2 _moveInterval = new(.5f, 2f);
+        [SerializeField] Vector2 _aimInterval = new(.5f, 2f);
+        [SerializeField] Vector2 _shootInterval = new(.5f, 2f);
+        
         [SerializeField] LayerMask _obstacleLayerMask;
         
         bool _isSimulating;
@@ -17,12 +26,14 @@ namespace Game.Ingame.AiScript
         TankController _playerTankController;
         TankPlayerInput _playerInput;
         TankController _tankController;
+        Simulator.Simulator _simulator;
 
         [Inject]
-        public void Construct(TankController tankController, TankPlayerInput tankPlayerInput)
+        public void Construct(TankController tankController, TankPlayerInput tankPlayerInput, Simulator.Simulator simulator)
         {
             _tankController = tankController;
             _playerInput = tankPlayerInput;
+            _simulator = simulator;
         }
 
         void Start()
@@ -39,7 +50,7 @@ namespace Game.Ingame.AiScript
         {
             while (_isSimulating)
             {
-                if (_tankController.IsAlive())
+                if (_canMove && _simulator.IsSimulating && _tankController.IsAlive())
                 {
                     var position = transform.position;
                     Vector3 targetPosition;
@@ -58,7 +69,7 @@ namespace Game.Ingame.AiScript
                     _tankController.InputTargetPosition(targetPosition);
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));
+                await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(_moveInterval.x, _moveInterval.y)));
             }
         }
 
@@ -66,12 +77,12 @@ namespace Game.Ingame.AiScript
         {
             while (_isSimulating)
             {
-                if (_tankController.IsAlive())
+                if (_canAim && _simulator.IsSimulating && _tankController.IsAlive())
                 {
                     _tankController.InputTurretTargetPosition(_playerTankController.transform.position);
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));
+                await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(_aimInterval.x, _aimInterval.y)));
             }
         }
 
@@ -79,12 +90,12 @@ namespace Game.Ingame.AiScript
         {
             while (_isSimulating)
             {
-                if (_tankController.IsAlive())
+                if (_canShoot && _simulator.IsSimulating && _tankController.IsAlive())
                 {
                     _tankController.InputShoot();
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));
+                await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(_shootInterval.x, _shootInterval.y)));
             }
         }
     }

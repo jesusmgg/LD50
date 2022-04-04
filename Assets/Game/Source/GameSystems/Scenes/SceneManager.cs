@@ -26,8 +26,19 @@ namespace Game.GameSystems.Scenes
 
         IEnumerator Start()
         {
-            // If there is no preloaded scene (for development), load the starting scene
-            if (UnityEngine.SceneManagement.SceneManager.sceneCount <= 1 && !string.IsNullOrWhiteSpace(startingScene))
+            // Unload all but the first
+            int c = UnityEngine.SceneManagement.SceneManager.sceneCount;
+            for (int i = 0; i < c; i++)
+            {
+                Scene scene = UnityEngine.SceneManagement.SceneManager.GetSceneAt(i);
+                if (scene.name != "MainScene")
+                {
+                    UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(scene);
+                }
+            }
+
+            // Load starting scene
+            if (!string.IsNullOrWhiteSpace(startingScene))
             {
                 TransitionToScene(startingScene);
             }

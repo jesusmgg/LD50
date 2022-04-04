@@ -34,13 +34,21 @@ namespace Game.Ingame.Simulator
             get { return _simulationSpeed; }
         }
 
+        public bool IsSimulating => _isSimulating;
         public int SimulationTick => _simulationTick;
         public int MaxSimulationTick => _maxSimulationTick;
         public float TimeStep => 1f / _tickRate;
         
+        public List<TankController> TankControllers => _tankControllers;
+        
         public UnityEvent<Vector3> OnBulletShoot = new();
         public UnityEvent<Vector3> OnBulletTravel = new();
         public UnityEvent<Vector3> OnBulletHit = new();
+
+        void OnDisable()
+        {
+            Stop();
+        }
 
         void Start()
         {
@@ -134,8 +142,6 @@ namespace Game.Ingame.Simulator
                 // Actual simulation tick happens here
                 foreach (var actor in _actors)
                 {
-                    var actorTransform = actor.GameObject.transform;
-                    
                     var previousState = actor.History[_simulationTick - 1];
                     var newState = new Actor.State
                     {

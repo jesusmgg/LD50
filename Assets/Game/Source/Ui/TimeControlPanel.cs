@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Ingame;
 using Game.Ingame.Simulator;
 using Game.Ingame.Tank;
 using TMPro;
@@ -28,24 +29,28 @@ namespace Game.Ui
         TankController _playerTankController;
         TankPlayerInput _tankPlayerInput;
         Simulator _simulator;
+        LevelScript _levelScript;
         
         static readonly int IsVisible = Animator.StringToHash("IsVisible");
 
         [Inject]
-        public void Construct(Simulator simulator, TankPlayerInput tankPlayerInput)
+        public void Construct(Simulator simulator, TankPlayerInput tankPlayerInput, LevelScript levelScript)
         {
             _simulator = simulator;
             _tankPlayerInput = tankPlayerInput;
+            _levelScript = levelScript;
         }
         
         void OnEnable()
         {
             _progressSlider.onValueChanged.AddListener(SetCurrentSimulationTick);
+            _levelScript.OnWin.AddListener(OnLevelWin);
         }
 
         void OnDisable()
         {
             _progressSlider.onValueChanged.RemoveListener(SetCurrentSimulationTick);
+            _levelScript.OnWin.RemoveListener(OnLevelWin);
         }
 
         void Start()
@@ -97,8 +102,16 @@ namespace Game.Ui
 
         public void SetSimulationSpeed(float speed)
         {
-            _simulator.SimulationSpeed = speed;
-            UpdateUi();
+            SetSimulationSpeed(speed, false);
+        }
+        
+        public void SetSimulationSpeed(float speed, bool ignoreWin)
+        {
+            if (ignoreWin || !_levelScript.IsWon)
+            {
+                _simulator.SimulationSpeed = speed;
+                UpdateUi();
+            }
         }
 
         void UpdateUi()
@@ -112,7 +125,7 @@ namespace Game.Ui
 
             _isPaused = speed < 0.01f;
             
-            _timeControlPanelAnimator.SetBool(IsVisible, _isPaused);
+            _timeControlPanelAnimator.SetBool(IsVisible, _isPaused && !_levelScript.IsWon);
         }
 
         void SetCurrentSimulationTick(float progress)
@@ -123,8 +136,16 @@ namespace Game.Ui
 
         public void SetCurrentSimulationTick(int tick)
         {
-            tick = Mathf.Clamp(tick, 0, _simulator.MaxSimulationTick);
-            _simulator.SetCurrentSimulationTick(tick);
+            if (!_levelScript.IsWon)
+            {
+                tick = Mathf.Clamp(tick, 0, _simulator.MaxSimulationTick);
+                _simulator.SetCurrentSimulationTick(tick);
+            }
+        }
+
+        void OnLevelWin()
+        {
+            SetSimulationSpeed(0f, true);
         }
     }
 }

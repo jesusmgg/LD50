@@ -4886,6 +4886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc4ffad105f49869dd18c04aca2e582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 1
   _turretTransform: {fileID: 8391806284989178126}
 --- !u!114 &7746529605323501832
 MonoBehaviour:

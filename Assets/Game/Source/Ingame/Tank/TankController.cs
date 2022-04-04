@@ -9,6 +9,7 @@ namespace Game.Ingame.Tank
 {
     public class TankController : MonoBehaviour
     {
+        [SerializeField] bool isPlayer;
         [SerializeField] Transform _turretTransform;
 
         List<MeshRenderer> _meshRenderers;
@@ -16,6 +17,7 @@ namespace Game.Ingame.Tank
         CinemachineVirtualCameraBase _virtualCamera;
         CinemachineBrain _cinemachineBrain;
 
+        public bool IsPlayer => isPlayer;
         public Transform TurretTransform => _turretTransform;
         public Actor Actor { get; private set; }
         public bool IsMoving

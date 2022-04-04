@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5201084479232013462, guid: 77c9b66533f42914aad698d9cb4444ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 85de046f43c58de4d9208eca6bff7284, type: 2}
+    - target: {fileID: 7746529605323501831, guid: 77c9b66533f42914aad698d9cb4444ab, type: 3}
+      propertyPath: isPlayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7746529605323501836, guid: 77c9b66533f42914aad698d9cb4444ab, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7746529605323501838, guid: 77c9b66533f42914aad698d9cb4444ab, type: 3}
       propertyPath: m_Name
-      value: EnemyRandomTank 1
+      value: EnemyRandomTank 1 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7746529605323501833, guid: 77c9b66533f42914aad698d9cb4444ab, type: 3}
@@ -75,4 +83,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7573c5df7536447c9313faffaef32d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canMove: 1
+  _canAim: 1
+  _canShoot: 1
   _roamingRange: 4
+  _moveInterval: {x: 0.5, y: 2}
+  _aimInterval: {x: 0.5, y: 2}
+  _shootInterval: {x: 0.5, y: 2}
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
