@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Ingame.Simulator;
 using TMPro;
 using UnityEngine;
@@ -12,19 +13,20 @@ namespace Game.Ui
         [SerializeField] Button _playButton1;
         [SerializeField] Button _playButton2;
         [SerializeField] Button _playButton3;
+        [SerializeField] Animator _timeControlPanelAnimator;
+        [SerializeField] Transform _arrow;
+
+        [SerializeField] List<float> _arrowRotations;
 
         [SerializeField] TextMeshProUGUI _currentProgressText;
         [SerializeField] TextMeshProUGUI _maxProgressText;
         [SerializeField] Slider _progressSlider;
 
-        [Header("Colors")]
-        [SerializeField] Color _activeButtonColor = Color.red;
-        [SerializeField] Color _normalButtonColor = Color.white;
+        bool _isPaused;
 
-        bool _isPaused; 
-        
         Simulator _simulator;
-        
+        static readonly int IsVisible = Animator.StringToHash("IsVisible");
+
         [Inject]
         public void Construct(Simulator simulator)
         {
@@ -35,7 +37,7 @@ namespace Game.Ui
         {
             _progressSlider.onValueChanged.AddListener(SetCurrentSimulationTick);
         }
-        
+
         void OnDisable()
         {
             _progressSlider.onValueChanged.RemoveListener(SetCurrentSimulationTick);
@@ -46,7 +48,7 @@ namespace Game.Ui
             _isPaused = false;
             _currentProgressText.text = "0";
             _maxProgressText.text = "0";
-            
+
             UpdateUi();
         }
 
@@ -58,8 +60,29 @@ namespace Game.Ui
 
             _currentProgressText.text = _simulator.SimulationTick.ToString();
             _maxProgressText.text = _simulator.MaxSimulationTick.ToString();
+
+            float targetRotation = _arrowRotations[0];
+            if (!_pauseButton.interactable)
+            {
+                targetRotation = _arrowRotations[0];
+            }
+            else if (!_playButton1.interactable)
+            {
+                targetRotation = _arrowRotations[1];
+            }
+            else if (!_playButton2.interactable)
+            {
+                targetRotation = _arrowRotations[2];
+            }
+            else if (!_playButton3.interactable)
+            {
+                targetRotation = _arrowRotations[3];
+            }
+
+            _arrow.rotation = Quaternion.Lerp(_arrow.rotation, Quaternion.Euler(0, 0, targetRotation),
+                Time.deltaTime * 10);
         }
-        
+
         public void SetSimulationSpeed(float speed)
         {
             _simulator.SimulationSpeed = speed;
@@ -70,20 +93,22 @@ namespace Game.Ui
         {
             var speed = _simulator.SimulationSpeed;
 
-            _pauseButton.image.color = speed < 0.01f ? _activeButtonColor : _normalButtonColor;
-            _playButton1.image.color = speed is >= 0.01f and < 1f ? _activeButtonColor : _normalButtonColor;
-            _playButton2.image.color = speed is >= 1f and < 2f ? _activeButtonColor : _normalButtonColor;
-            _playButton3.image.color = speed >= 2f ? _activeButtonColor : _normalButtonColor;
-            
+            _pauseButton.interactable = !(speed < 0.01f);
+            _playButton1.interactable = !(speed is >= 0.01f and < 1f);
+            _playButton2.interactable = !(speed is >= 1f and < 2f);
+            _playButton3.interactable = !(speed >= 2f);
+
             _isPaused = speed < 0.01f;
+            
+            _timeControlPanelAnimator.SetBool(IsVisible, _isPaused);
         }
-        
+
         void SetCurrentSimulationTick(float progress)
         {
-            var tickInt = (int) (progress * _simulator.MaxSimulationTick);
+            var tickInt = (int)(progress * _simulator.MaxSimulationTick);
             SetCurrentSimulationTick(tickInt);
         }
-        
+
         public void SetCurrentSimulationTick(int tick)
         {
             tick = Mathf.Clamp(tick, 0, _simulator.MaxSimulationTick);

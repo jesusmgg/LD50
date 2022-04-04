@@ -734,6 +734,10 @@
          id="feComposite4158" />
     </filter>
     <filter
+       height="1.3999999999999999"
+       width="1.3999999999999999"
+       y="-0.20000000000000001"
+       x="-0.20000000000000001"
        id="filter1319"
        inkscape:label="Drop Shadow"
        style="color-interpolation-filters:sRGB;">
@@ -833,6 +837,55 @@
          in2="offset"
          in="SourceGraphic" />
     </filter>
+    <filter
+       height="2"
+       width="2"
+       y="-0.29999999999999999"
+       x="-0.29999999999999999"
+       style="color-interpolation-filters:sRGB"
+       inkscape:label="Drop Shadow"
+       id="filter1319-3">
+      <feFlood
+         flood-opacity="0.2"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood1309-0" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite1311-5" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="0"
+         result="blur"
+         id="feGaussianBlur1313-1" />
+      <feOffset
+         dx="4"
+         dy="3"
+         result="offset"
+         id="feOffset1315-5" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite1317-0" />
+    </filter>
+    <filter
+       height="1.0000216"
+       y="-1.0800001e-05"
+       width="1.0000216"
+       x="-1.0799999e-05"
+       id="filter1562"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur1564"
+         stdDeviation="0.0011520001"
+         inkscape:collect="always" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -841,11 +894,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="5652.19"
-     inkscape:cy="-77.827598"
+     inkscape:zoom="0.12374369"
+     inkscape:cx="4963.1425"
+     inkscape:cy="343.63959"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="g1552"
      inkscape:document-rotation="0"
      showgrid="false" />
   <metadata
@@ -1168,21 +1221,34 @@
        inkscape:export-xdpi="39"
        inkscape:export-ydpi="39"
        transform="translate(-1378.8572,-831.54763)">
-      <rect
-         y="146.41072"
-         x="2368.0081"
-         height="256"
-         width="256"
-         id="rect1539"
-         style="opacity:1;fill:#ff5a46;fill-opacity:1;stroke:none;stroke-width:5.86499;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         id="path1541"
-         d="m 2496.0081,146.41072 v 256"
-         style="fill:none;fill-opacity:1;stroke:#29335c;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         style="fill:none;fill-opacity:1;stroke:#29335c;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 2368.0081,274.41072 h 256"
-         id="path1541-2" />
+      <g
+         style="filter:url(#filter1562)"
+         inkscape:export-ydpi="25"
+         inkscape:export-xdpi="25"
+         inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\Textures\floor_2.png"
+         id="g1552">
+        <g
+           id="g1569">
+          <rect
+             inkscape:export-ydpi="25.4"
+             inkscape:export-xdpi="25.4"
+             inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\Textures\floor_2.png"
+             y="146.41072"
+             x="2368.0081"
+             height="256"
+             width="256"
+             id="rect1539"
+             style="opacity:1;fill:#29335c;fill-opacity:1;stroke:none;stroke-width:5.86499;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             id="path1541"
+             d="m 2496.0081,146.41072 v 256"
+             style="fill:none;fill-opacity:1;stroke:#ffd972;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             style="fill:none;fill-opacity:1;stroke:#ffd972;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m 2368.0081,274.41072 h 256"
+             id="path1541-2" />
+        </g>
+      </g>
     </g>
     <path
        inkscape:export-ydpi="95.712761"
@@ -1708,10 +1774,10 @@
          style="opacity:1;fill:#dbe3ea;fill-opacity:1;stroke:#000007;stroke-width:2.19;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
-       inkscape:export-ydpi="95"
-       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95.099998"
+       inkscape:export-xdpi="95.099998"
        inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\slider_handle_active.png"
-       style="filter:url(#filter1319)"
+       style="filter:url(#filter1319);opacity:0.99900008"
        transform="matrix(1.27,0,0,1.2699999,-526.53872,-21.653009)"
        id="g1187">
       <circle
@@ -1726,26 +1792,6 @@
          cx="1578.5405"
          cy="127.07957"
          r="22.98518" />
-    </g>
-    <g
-       inkscape:export-ydpi="95"
-       inkscape:export-xdpi="95"
-       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\slider_handle_inactive.png"
-       id="g1187-3"
-       transform="matrix(1.27,0,0,1.2699999,-402.1274,52.543489)"
-       style="filter:url(#filter1319-9)">
-      <circle
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:6.065;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="path1166-5-4"
-         cx="1578.5405"
-         cy="127.07957"
-         r="22.98518" />
-      <circle
-         r="22.98518"
-         cy="127.07957"
-         cx="1578.5405"
-         id="path1166-3"
-         style="opacity:1;fill:#dbe3ea;fill-opacity:1;stroke:#000000;stroke-width:2.165;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
        inkscape:export-ydpi="95"
