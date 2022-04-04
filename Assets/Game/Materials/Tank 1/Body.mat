@@ -26,7 +26,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -129,6 +129,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _FurMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FurNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _LightingShadowMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -197,6 +205,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RimEnviroMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -258,6 +270,8 @@ Material:
     - DSGI: 0
     - LightmapFlags: 0
     - _AOStrength: 1
+    - _AdditionalLights: 1
+    - _AdditionalLightsSpecular: 0
     - _AdditiveOffset: 0
     - _AdditiveSoftness: 0.005
     - _AlphaClip: 0
@@ -266,6 +280,7 @@ Material:
     - _AngleType: 0
     - _AnisoSpec1Alpha: 1
     - _AnisoSpec2Alpha: 1
+    - _AnisoSpecular: 0
     - _AnisoUseTangentMap: 0
     - _AttenuationMultiplier: 0
     - _BackFaceDetailIntensity: 1
@@ -286,6 +301,7 @@ Material:
     - _ClearCoatSampleWorld: 0
     - _ClearCoatSmoothness: 0
     - _Clip: 0.5
+    - _ClipSpace: 1
     - _ContinuousDissolve: 0
     - _Cull: 2
     - _Cutoff: 0.5
@@ -294,6 +310,8 @@ Material:
     - _DebugLightingData: 0
     - _DebugMeshData: 0
     - _DebugSpecularData: 0
+    - _DepthOffsetFactor: 0
+    - _DepthOffsetUnits: 0
     - _DestinationBlend: 10
     - _DetailAlbedoMapScale: 1
     - _DetailBrightness: 1
@@ -314,6 +332,7 @@ Material:
     - _DissolveType: 1
     - _DitheringEnabled: 0
     - _DstBlend: 0
+    - _Emission: 0
     - _EmissionCenterOutEnabled: 0
     - _EmissionCenterOutEnabled1: 0
     - _EmissionCenterOutSpeed: 5
@@ -350,6 +369,7 @@ Material:
     - _EnableRimLighting: 0
     - _EnableSSS: 0
     - _EnableSpecular: 0
+    - _EnvironmentLightingEnabled: 1
     - _EnvironmentReflections: 1
     - _FlipbookAdd: 0
     - _FlipbookCurrentFrame: -1
@@ -361,7 +381,13 @@ Material:
     - _FlipbookTiled: 0
     - _FlipbookTotalFrames: 1
     - _FlipbookUV: 0
+    - _Fog: 1
     - _ForceOpaque: 0
+    - _Fresnel: 1
+    - _FresnelSmoothness: 0.1
+    - _FresnelThickness: 0.45
+    - _FurLength: 0.1
+    - _FurStep: 0.1
     - _GIEmissionMultiplier: 1
     - _GITDEMaxEmissionMultiplier: 0
     - _GITDEMaxEmissionMultiplier1: 0
@@ -430,7 +456,12 @@ Material:
     - _ParallaxInternalMinFade: 0
     - _ParallaxMap: 0
     - _ParallaxStrength: 0
+    - _PureShadowColor: 0
     - _QueueOffset: 0
+    - _Ramp0: 0
+    - _Ramp1: 0.5
+    - _RampSmoothness: 0.74
+    - _RampTriple: 0
     - _ReceiveShadows: 1
     - _RimAmount: 0.716
     - _RimBrighten: 0
@@ -451,24 +482,29 @@ Material:
     - _SSSThicknessMod: 0
     - _SampleWorld: 0
     - _Saturation: 0
+    - _Scale: 0.05
     - _ScrollingEmission: 0
     - _ScrollingEmission1: 0
+    - _ShadowMask: 0
     - _ShadowMix: 0
     - _ShadowMixThreshold: 0.5
     - _ShadowMixWidthMod: 0.5
     - _ShadowOffset: 0
     - _ShadowStrength: 0.2
-    - _Smoothness: 0.5
+    - _Smoothness: 0
     - _SmoothnessFrom: 1
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _Spec2Smoothness: 0
     - _SpecWhatTangent: 0
+    - _Specular: 1
+    - _SpecularExponent: 200
     - _SpecularHighlights: 1
     - _SpecularInvertSmoothness: 0
     - _SpecularMinLightBrightness: 0
     - _SpecularMixAlbedoIntoTint: 0
     - _SpecularSmoothness: 0.75
+    - _SpecularThreshold: 0.8
     - _SpecularType: 1
     - _SrcBlend: 1
     - _StencilCompareFunction: 8
@@ -478,6 +514,9 @@ Material:
     - _StencilZFailOp: 0
     - _Surface: 0
     - _UVSec: 0
+    - _UseRampMap: 0
+    - _VertexColor: 0
+    - _VertexLit: 0
     - _VertexManipulationHeight: 0
     - _VertexManipulationHeightBias: 0
     - _WorkflowMode: 1
@@ -613,6 +652,7 @@ Material:
     - _EmissiveScroll_Direction1: {r: 0, g: -10, b: 0, a: 0}
     - _FlipbookColor: {r: 1, g: 1, b: 1, a: 1}
     - _FlipbookScaleOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlobalPanSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _MainDetailNormalPan: {r: 0, g: 0, b: 0, a: 0}
     - _MainDistanceFade: {r: 0, g: 0, b: 0, a: 0}
@@ -631,6 +671,7 @@ Material:
     - _RimTexPanSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _RimWidthNoisePan: {r: 0, g: 0, b: 0, a: 0}
     - _SSSColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowTint: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _SpecularTint: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

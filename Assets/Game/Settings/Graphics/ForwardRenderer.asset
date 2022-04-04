@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7666102247530595838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
+  m_Name: OutlineFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineLayers: {fileID: 11400000, guid: dc2ec237319140541b502ea80b6e7bca, type: 2}
+  _outlineSettings: {_outlineSettings: {fileID: 0}, _outlineColor:
+      r: 1
+      g: 0
+      b: 0
+      a: 1
+, _outlineWidth: 4, _outlineIntensity: 2, _outlineAlphaCutoff: 0.9, _outlineMode: 0, _filterMode: 0, _layerMask:
+      m_Bits: 1
+, _renderingLayerMask: 1}
+--- !u!114 &-6308304327033453557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
+  m_Name: Toon Shading
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    passTag: Toon Shading
+    Event: 450
+    filterSettings:
+      RenderQueueType: 0
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 1
+      PassNames: []
+    overrideMaterial: {fileID: 2100000, guid: 317ba747ac20b004e9f3773ed91b395a, type: 2}
+    overrideMaterialPassIndex: 0
+    overrideDepthState: 0
+    depthCompareFunction: 4
+    enableWrite: 1
+    stencilSettings:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
+    cameraSettings:
+      overrideCamera: 0
+      restoreCamera: 1
+      offset: {x: 0, y: 0, z: 0, w: 0}
+      cameraFieldOfView: 60
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,8 +76,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugShaders:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: -6308304327033453557}
+  m_RendererFeatureMap: 0b841c2ca36674a8
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
