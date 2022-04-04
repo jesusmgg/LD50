@@ -9,7 +9,7 @@ namespace Game.Ingame.Tank
 {
     public class TankController : MonoBehaviour
     {
-        [SerializeField] private Transform _turretTransform;
+        [SerializeField] Transform _turretTransform;
 
         List<MeshRenderer> _meshRenderers;
         Simulator.Simulator _simulator;
@@ -17,7 +17,19 @@ namespace Game.Ingame.Tank
         CinemachineBrain _cinemachineBrain;
 
         public Actor Actor { get; private set; }
-        // public bool IsMoving => _currentMovementInput.magnitude > 0.01f;
+        public bool IsMoving
+        {
+            get
+            {   
+                if (_simulator == null)
+                {
+                    return false;
+                }
+
+                return !_simulator.IsAtPosition(Actor, Actor.History[_simulator.SimulationTick].TargetBodyPosition,
+                    _simulator.SimulationTick);
+            }
+        }
 
         [Inject]
         void Construct(

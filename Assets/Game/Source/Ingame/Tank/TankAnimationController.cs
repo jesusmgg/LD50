@@ -15,7 +15,7 @@ namespace Game.Ingame.Tank
 
         void Update()
         {
-            // _animator.SetBool(IsMoving, _tankController.IsMoving);
+            _animator.SetBool(IsMoving, _tankController.IsMoving);
         }
     }
 }

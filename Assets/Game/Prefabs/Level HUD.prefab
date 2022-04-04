@@ -101,17 +101,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2191456651330423564}
-  m_LocalRotation: {x: 0, y: 0, z: -0.55157304, w: 0.83412665}
+  m_LocalRotation: {x: 0, y: 0, z: -0.17450753, w: 0.98465586}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5217495627408410346}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -66.95}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20.1}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -76.35196, y: -17.700012}
+  m_AnchoredPosition: {x: 2, y: -6}
   m_SizeDelta: {x: 433, y: 103}
   m_Pivot: {x: 0.03844813, y: 0.5}
 --- !u!222 &8981048476290487154
@@ -879,7 +879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.4, y: -283.4}
+  m_AnchoredPosition: {x: 497, y: -315}
   m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5217495627162681481
@@ -1016,8 +1016,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 312.9579, y: -337.44604}
-  m_SizeDelta: {x: 652.0842, y: 703.1079}
+  m_AnchoredPosition: {x: 286, y: -288}
+  m_SizeDelta: {x: 725, y: 725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6820732905446465264
 CanvasRenderer:
@@ -1049,7 +1049,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e784cb2a36d93b140b70ed2d7c3b161f, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1523,10 +1523,10 @@ MonoBehaviour:
   _timeControlPanelAnimator: {fileID: 184627301}
   _arrow: {fileID: 6575876158979161028}
   _arrowRotations:
-  - -67
-  - -48
-  - -30
-  - -9
+  - -70
+  - -50
+  - -35
+  - -20
   _currentProgressText: {fileID: 5217495627570633314}
   _maxProgressText: {fileID: 5217495627940537412}
   _progressSlider: {fileID: 5217495628451564310}
@@ -1625,7 +1625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 297, y: -438}
+  m_AnchoredPosition: {x: 374, y: -469}
   m_SizeDelta: {x: 86, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5217495628001467814
@@ -1835,7 +1835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 478.6, y: -99}
+  m_AnchoredPosition: {x: 524, y: -135}
   m_SizeDelta: {x: 235, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5217495628323841074
@@ -2241,7 +2241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 117, y: -504}
+  m_AnchoredPosition: {x: 181, y: -561}
   m_SizeDelta: {x: 81, y: 106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5217495628609191524

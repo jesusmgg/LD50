@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Ingame.Simulator;
+using Game.Ingame.Tank;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,15 +25,19 @@ namespace Game.Ui
 
         bool _isPaused;
 
+        TankController _playerTankController;
+        TankPlayerInput _tankPlayerInput;
         Simulator _simulator;
+        
         static readonly int IsVisible = Animator.StringToHash("IsVisible");
 
         [Inject]
-        public void Construct(Simulator simulator)
+        public void Construct(Simulator simulator, TankPlayerInput tankPlayerInput)
         {
             _simulator = simulator;
+            _tankPlayerInput = tankPlayerInput;
         }
-
+        
         void OnEnable()
         {
             _progressSlider.onValueChanged.AddListener(SetCurrentSimulationTick);
@@ -45,6 +50,8 @@ namespace Game.Ui
 
         void Start()
         {
+            _playerTankController = _tankPlayerInput.TankController;
+            
             _isPaused = false;
             _currentProgressText.text = "0";
             _maxProgressText.text = "0";
@@ -54,6 +61,11 @@ namespace Game.Ui
 
         void Update()
         {
+            if (!_playerTankController.IsAlive())
+            {
+                SetSimulationSpeed(0f);
+            }
+            
             _progressSlider.interactable = _isPaused;
 
             _progressSlider.value = (float)_simulator.SimulationTick / _simulator.MaxSimulationTick;

@@ -11,6 +11,8 @@ namespace Game.Ingame.AiScript
     {
         [SerializeField] float _roamingRange = 4f;
         
+        bool _isSimulating;
+
         TankController _playerTankController;
         TankPlayerInput _playerInput;
         TankController _tankController;
@@ -25,7 +27,8 @@ namespace Game.Ingame.AiScript
         void Start()
         {
             _playerTankController = _playerInput.TankController;
-            
+            _isSimulating = true;
+
             UpdatePosition().Forget();
             UpdateTurret().Forget();
             Shoot().Forget();
@@ -33,29 +36,41 @@ namespace Game.Ingame.AiScript
 
         async UniTask UpdatePosition()
         {
-            while (_tankController.IsAlive())
+            while (_isSimulating)
             {
-                var translation = new Vector3(1f, 0, 1f) * Random.Range(1f, _roamingRange);
-                translation = Quaternion.AngleAxis(Random.Range(0f, 359f), Vector3.up) * translation;
-                _tankController.InputTargetPosition(transform.position + translation);
+                if (_tankController.IsAlive())
+                {
+                    var translation = new Vector3(1f, 0, 1f) * Random.Range(1f, _roamingRange);
+                    translation = Quaternion.AngleAxis(Random.Range(0f, 359f), Vector3.up) * translation;
+                    _tankController.InputTargetPosition(transform.position + translation);
+                }
+
                 await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));
             }
         }
 
         async UniTask UpdateTurret()
         {
-            while (_tankController.IsAlive())
+            while (_isSimulating)
             {
-                _tankController.InputTurretTargetPosition(_playerTankController.transform.position);
+                if (_tankController.IsAlive())
+                {
+                    _tankController.InputTurretTargetPosition(_playerTankController.transform.position);
+                }
+
                 await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));
             }
         }
 
         async UniTask Shoot()
         {
-            while (_tankController.IsAlive())
+            while (_isSimulating)
             {
-                _tankController.InputShoot();
+                if (_tankController.IsAlive())
+                {
+                    _tankController.InputShoot();
+                }
+
                 await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));
             }
         }
