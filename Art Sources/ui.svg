@@ -801,6 +801,38 @@
          result="composite2"
          id="feComposite1317-7" />
     </filter>
+    <filter
+       id="filter1537-3"
+       inkscape:label="Drop Shadow"
+       style="color-interpolation-filters:sRGB">
+      <feFlood
+         id="feFlood1527-3"
+         result="flood"
+         flood-color="rgb(0,0,0)"
+         flood-opacity="0.2" />
+      <feComposite
+         id="feComposite1529-7"
+         result="composite1"
+         operator="in"
+         in2="SourceGraphic"
+         in="flood" />
+      <feGaussianBlur
+         id="feGaussianBlur1531-8"
+         result="blur"
+         stdDeviation="0"
+         in="composite1" />
+      <feOffset
+         id="feOffset1533-8"
+         result="offset"
+         dy="6"
+         dx="6" />
+      <feComposite
+         id="feComposite1535-3"
+         result="composite2"
+         operator="over"
+         in2="offset"
+         in="SourceGraphic" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -809,9 +841,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.12374369"
-     inkscape:cx="3250.014"
-     inkscape:cy="303.75846"
+     inkscape:zoom="0.175"
+     inkscape:cx="5652.19"
+     inkscape:cy="-77.827598"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      inkscape:document-rotation="0"
@@ -1078,7 +1110,7 @@
        y="-297.97198" />
     <g
        id="g1268"
-       transform="matrix(1.3264338,0,0,1.3264338,-597.44476,-108.68974)"
+       transform="matrix(1.3264338,0,0,1.3264338,-590.40986,-101.62479)"
        style="filter:url(#filter1436)">
       <circle
          style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:5.865;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1093,6 +1125,9 @@
          sodipodi:arc-type="slice"
          d="M 1566.9548,-148.02638 A 121.72594,121.72594 0 0 1 1445.2289,-26.300446 V -148.02638 Z" />
       <circle
+         inkscape:export-ydpi="95.712761"
+         inkscape:export-xdpi="95.712761"
+         inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\panel_quarter_circle_1.png"
          d="M 1566.9548,-148.02638 A 121.72594,121.72594 0 0 1 1445.2289,-26.300446 V -148.02638 Z"
          sodipodi:arc-type="slice"
          sodipodi:end="1.5707963"
@@ -1106,9 +1141,12 @@
          style="opacity:1;fill:#dbe3ea;fill-opacity:1;stroke:#000000;stroke-width:2.365;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1603)" />
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\panel_square_2.png"
        id="g1465"
        style="filter:url(#filter1537)"
-       transform="matrix(1.27,0,0,1.2699999,-430.10169,-24.441539)">
+       transform="matrix(1.27,0,0,1.2699999,-437.58524,-22.303383)">
       <rect
          style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:5.865;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect1438-9"
@@ -1147,10 +1185,16 @@
          id="path1541-2" />
     </g>
     <path
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play1_normal.png"
        style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2.54;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 1405.4793,-188.92396 -20.2312,-11.68053 v 24.00494 z"
        id="path1609" />
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play3_normal.png"
        id="g2063"
        transform="matrix(1.27,0,0,1.2699999,-476.62976,-297.09528)"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
@@ -1168,6 +1212,9 @@
          id="path1609-9-2-1" />
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play2_normal.png"
        id="g2058"
        transform="matrix(1.27,0,0,1.2699999,-479.45935,-267.90412)"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
@@ -1181,30 +1228,36 @@
          id="path1609-9-2-6" />
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_pause_normal.png"
        id="g2071"
        transform="matrix(1.27,0,0,1.2699999,-586.57998,-154.44411)">
       <g
-         id="g1710">
-        <path
-           id="path1691-0"
-           d="M 1522.6864,-19.661131 V -5.5115284"
-           style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-        <path
-           style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.35351;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 1522.6864,-19.661131 V -5.5115284"
-           id="path1691" />
-      </g>
-      <g
-         transform="translate(8.8245442)"
-         id="g1710-4">
-        <path
-           style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 1522.6864,-19.661131 V -5.5115284"
-           id="path1691-0-6" />
-        <path
-           id="path1691-6"
-           d="M 1522.6864,-19.661131 V -5.5115284"
-           style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.35351;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         id="g1450">
+        <g
+           id="g1710">
+          <path
+             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 1522.6864,-19.661131 V -5.5115284"
+             id="path1691-0" />
+          <path
+             id="path1691"
+             d="M 1522.6864,-19.661131 V -5.5115284"
+             style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.35351;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        </g>
+        <g
+           id="g1710-4"
+           transform="translate(8.8245442)">
+          <path
+             id="path1691-0-6"
+             d="M 1522.6864,-19.661131 V -5.5115284"
+             style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+          <path
+             style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:4.35351;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="M 1522.6864,-19.661131 V -5.5115284"
+             id="path1691-6" />
+        </g>
       </g>
     </g>
     <g
@@ -1243,6 +1296,9 @@
          style="fill:#f4faff;fill-opacity:1;stroke:none;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\button_square_1_click.png"
        id="g1603-5"
        style="filter:url(#filter1713-9)"
        transform="matrix(2.9443589,0,0,2.9443587,1508.8848,-458.16019)">
@@ -1285,6 +1341,9 @@
          y="82.776779" />
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\button_square_1_normal.png"
        transform="matrix(2.9443589,0,0,2.9443587,1250.141,-458.25311)"
        id="g1723-0-2">
       <g
@@ -1330,6 +1389,9 @@
       </g>
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\button_square_1_hover.png"
        id="g1723-0-1-5"
        transform="matrix(2.9443589,0,0,2.9443587,1373.5147,-458.20388)">
       <g
@@ -1375,6 +1437,9 @@
       </g>
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\arrow.png"
        id="g3345"
        transform="matrix(0.9561735,0,0,1.2699999,-241.54256,-124.03994)">
       <g
@@ -1398,6 +1463,9 @@
       </g>
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play3_click.png"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
        transform="matrix(1.27,0,0,1.2699999,-272.24258,-137.83901)"
        id="g2063-3">
@@ -1415,6 +1483,9 @@
          style="fill:#000000;fill-opacity:1;stroke:#ff5a46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play3_hover.png"
        id="g2063-3-1"
        transform="matrix(1.27,0,0,1.2699999,-301.5244,-285.44814)"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
@@ -1432,6 +1503,9 @@
          id="path1609-9-2-1-9-3" />
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play2_click.png"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
        transform="matrix(1.27,0,0,1.2699999,-189.7975,-163.52406)"
        id="g2058-8">
@@ -1445,6 +1519,9 @@
          style="fill:#000000;fill-opacity:1;stroke:#ff5a46;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play2_hover.png"
        style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
        transform="matrix(1.27,0,0,1.2699999,-183.07708,-102.08026)"
        id="g2058-0">
@@ -1458,15 +1535,24 @@
          style="fill:#000000;fill-opacity:1;stroke:#ffd972;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <path
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play1_click.png"
        id="path1609-1"
        d="m 1777.5668,-118.94095 -20.2312,-11.68054 v 24.00496 z"
        style="fill:#000000;fill-opacity:1;stroke:#ff5a46;stroke-width:2.54;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_play1_hover.png"
        id="path1609-93"
        d="m 1782.3671,-58.457209 -20.2313,-11.68053 v 24.00495 z"
        style="fill:#000000;fill-opacity:1;stroke:#ffd972;stroke-width:2.54;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <g
-       transform="matrix(1.27,0,0,1.2699999,-121.08098,-104.5545)"
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_pause_click.png"
+       transform="matrix(1.27,0,0,1.2699999,-125.61669,-104.5545)"
        id="g2071-5">
       <g
          id="g1710-1">
@@ -1493,6 +1579,9 @@
       </g>
     </g>
     <g
+       inkscape:export-ydpi="95.712761"
+       inkscape:export-xdpi="95.712761"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\time_pause_hover.png"
        transform="matrix(1.27,0,0,1.2699999,-118.20081,-42.150629)"
        id="g2071-0">
       <g
@@ -1520,7 +1609,10 @@
       </g>
     </g>
     <g
-       transform="matrix(4.1252606,0,0,4.1252606,876.5274,73.750931)"
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\logo_1.png"
+       transform="matrix(2.522352,0,0,2.522352,793.31816,172.95308)"
        id="g2328">
       <g
          id="g2364"
@@ -1594,6 +1686,9 @@
       </g>
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\slider_bg.png"
        id="g4088"
        transform="matrix(1.27,0,0,1.2699999,-597.47886,-112.76924)"
        style="filter:url(#filter4160)">
@@ -1613,6 +1708,9 @@
          style="opacity:1;fill:#dbe3ea;fill-opacity:1;stroke:#000007;stroke-width:2.19;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\slider_handle_active.png"
        style="filter:url(#filter1319)"
        transform="matrix(1.27,0,0,1.2699999,-526.53872,-21.653009)"
        id="g1187">
@@ -1630,6 +1728,9 @@
          r="22.98518" />
     </g>
     <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\slider_handle_inactive.png"
        id="g1187-3"
        transform="matrix(1.27,0,0,1.2699999,-402.1274,52.543489)"
        style="filter:url(#filter1319-9)">
@@ -1645,6 +1746,28 @@
          cx="1578.5405"
          id="path1166-3"
          style="opacity:1;fill:#dbe3ea;fill-opacity:1;stroke:#000000;stroke-width:2.165;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       inkscape:export-ydpi="95"
+       inkscape:export-xdpi="95"
+       inkscape:export-filename="C:\Users\Jesus\Unity Projects\LD50\Assets\Game\UI\panel_square_1.png"
+       transform="matrix(1.27,0,0,1.2699999,-56.847676,-24.010889)"
+       style="filter:url(#filter1537-3)"
+       id="g1465-4">
+      <rect
+         y="-52.925888"
+         x="1590.1321"
+         height="128.5119"
+         width="234.34525"
+         id="rect1438-9-1"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:5.865;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         style="opacity:1;fill:#dbe3ea;fill-opacity:1;stroke:#000000;stroke-width:2.165;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect1438-3"
+         width="234.34523"
+         height="128.5119"
+         x="1590.1321"
+         y="-52.925888" />
     </g>
   </g>
 </svg>
