@@ -4916,6 +4916,9 @@ MonoBehaviour:
   _mouseRaycastMask:
     serializedVersion: 2
     m_Bits: 1
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &7746529605323501834
 MonoBehaviour:
   m_ObjectHideFlags: 0

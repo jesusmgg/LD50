@@ -218,7 +218,17 @@ namespace Game.Ingame.Simulator
                         newState.BulletPosition += newState.BulletDirection * actor.BulletSpeed * TimeStep;
                         OnBulletTravel.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));
                         
+                        // Range limit
                         if (Vector2.Distance(newState.BulletPosition, newState.BodyPosition) > actor.BulletRange)
+                        {
+                            newState.HasBullet = false;
+                            OnBulletHit.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));
+                        }
+                        
+                        // Obstacle hit
+                        else if (Physics.CheckSphere(
+                                     Actor.SimulatorToUnityPosition(newState.BulletPosition) + Vector3.up, 0.2f,
+                                     _settings.ObstacleLayerMask))
                         {
                             newState.HasBullet = false;
                             OnBulletHit.Invoke(Actor.SimulatorToUnityPosition(newState.BulletPosition));

@@ -10,6 +10,7 @@ namespace Game.Ingame.AiScript
     public class RandomShooterAi : MonoBehaviour
     {
         [SerializeField] float _roamingRange = 4f;
+        [SerializeField] LayerMask _obstacleLayerMask;
         
         bool _isSimulating;
 
@@ -40,9 +41,21 @@ namespace Game.Ingame.AiScript
             {
                 if (_tankController.IsAlive())
                 {
-                    var translation = new Vector3(1f, 0, 1f) * Random.Range(1f, _roamingRange);
-                    translation = Quaternion.AngleAxis(Random.Range(0f, 359f), Vector3.up) * translation;
-                    _tankController.InputTargetPosition(transform.position + translation);
+                    var position = transform.position;
+                    Vector3 targetPosition;
+                    Vector3 direction;
+                    float distance;
+                    do
+                    {
+                        Vector3 translation = new Vector3(1f, 0, 1f) * Random.Range(1f, _roamingRange);
+                        translation = Quaternion.AngleAxis(Random.Range(0f, 359f), Vector3.up) * translation;
+
+                        targetPosition = position + translation;
+                        direction = targetPosition - position;
+                        distance = direction.magnitude;
+                    } while (Physics.Raycast(position, direction, out RaycastHit _, distance, _obstacleLayerMask));
+
+                    _tankController.InputTargetPosition(targetPosition);
                 }
 
                 await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(0.5f, 2f)));

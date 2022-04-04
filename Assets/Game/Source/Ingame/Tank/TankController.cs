@@ -16,6 +16,7 @@ namespace Game.Ingame.Tank
         CinemachineVirtualCameraBase _virtualCamera;
         CinemachineBrain _cinemachineBrain;
 
+        public Transform TurretTransform => _turretTransform;
         public Actor Actor { get; private set; }
         public bool IsMoving
         {

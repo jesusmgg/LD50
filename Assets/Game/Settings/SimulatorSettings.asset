@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d2e6a6c97c4ec19fdfa17044912fef, type: 3}
   m_Name: SimulatorSettings
   m_EditorClassIdentifier: 
+  ObstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   TankSpeed: 10
   TankTurnSpeed: 90
   TankHitpoints: 2
