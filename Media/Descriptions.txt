@@ -29,7 +29,7 @@ Development tools and stuff to note:
 - Unity with Zenject and UniTask as the main framework.
 - I built a deterministic simulator for the levels so that I could achieve the time traveling. This was an amazing learning experience that I will try to use to develop strategy games in the future.
 - Probuilder for the level geometry.
-- All of the graphic design, UI and some textures where made with Inkscape, and GIMP as an auxiliary tool.
+- All of the graphic design, UI and some textures were made with Inkscape, and GIMP as an auxiliary tool.
 - Blender for the single 3D model: the tank.
 - A ton of Italo Disco and coffee during development to keep me awake.
 
