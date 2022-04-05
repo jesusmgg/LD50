@@ -9,6 +9,7 @@ namespace Game.Ingame.Tank
         {
             Container.Bind<TankController>().FromComponentOn(gameObject).AsSingle();
             Container.Bind<MeshRenderer>().FromComponentsInChildren().AsSingle();
+            Container.Bind<TankAudioPlayer>().FromComponentOn(gameObject).AsSingle();
         }
     }
 }
