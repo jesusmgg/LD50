@@ -1,0 +1,57 @@
+Made in 72 hours for the Ludum Dare 50 jam.
+
+I recommend you to just go play the game before reading any of this. If you get stuck or don't understand the controls, come back to read.
+
+Command your tank and defeat every enemy to clear the levels.
+
+The game was made almost completely from scratch, and I was planning to submit it to the Compo but missed the deadline, and then I remembered Reddit's favorite quote:
+"A delayed game is eventually good, but a rushed game is forever bad."
+
+Features
+- Command a tank.
+- Go back and forth in time to get the best outcome. Delay your victory to ensure it.
+- The time traveling can even be used to roll-back bugged enemies, as they sometimes can clip though walls.
+- Four action-packed levels.
+- Clean graphics.
+- A fully-functional main menu.
+- A lot of fun.
+
+Missing or incomplete:
+- I wanted to compose my own music and sound effects, but I just didn't had enough time.
+- UI sounds are not implemented.
+- Scene transitions.
+- Animation smoothing.
+- More levels.
+- More enemy types.
+- I'll replace the downloaded assets (textures, sounds, music) with my own and keep building over this. I think an expanded version of this game would work pretty well as a casual mobile game.
+
+Development tools and stuff to note:
+- Unity with Zenject and UniTask as the main framework.
+- I built a deterministic simulator for the levels so that I could achieve the time traveling. This was an amazing learning experience that I will try to use to develop strategy games in the future.
+- Probuilder for the level geometry.
+- All of the graphic design, UI and some textures where made with Inkscape, and GIMP as an auxiliary tool.
+- Blender for the single 3D model: the tank.
+- A ton of Italo Disco and coffee during development to keep me awake.
+
+Additional credits:
+Kenney Future fonts by Kenney - www.kenney.nl
+
+Rock wall vector created by 0melapics - www.freepik.com
+
+Bark vector created by 0melapics - www.freepik.com
+
+Suvaco do Cristo by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4449-suvaco-do-cristo
+License: https://filmmusic.io/standard-license
+
+Seven March by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4338-seven-march
+License: https://filmmusic.io/standard-license
+
+March of the Spoons by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4021-march-of-the-spoons
+License: https://filmmusic.io/standard-license
+
+Bumbly March by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/3463-bumbly-march
+License: https://filmmusic.io/standard-license

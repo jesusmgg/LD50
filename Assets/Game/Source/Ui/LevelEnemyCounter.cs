@@ -19,7 +19,7 @@ namespace Game.Ui
 
         void Update()
         {
-            _text.text = $"Enemies:{_levelScript.EnemyCount.ToString()}";
+            _text.text = $"Enemies: {_levelScript.EnemyCount.ToString()}";
         }
     }
 }
